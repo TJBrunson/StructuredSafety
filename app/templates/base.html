@@ -1,35 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {% if title %}
-    <title>{{ title }} - Structured Safety</title>
-    {% else %}
-    <title>Structured Safety</title>
-    {% endif %}
-</head>
-<body>
-    <div>Structured Safety:
-        <a href="{{ url_for('index') }}">Home</a>
-        {% if current_user.is_anonymous %}
-        <a href="{{ url_for('login') }}">Login</a>
-        {% else %}
-        <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
-        <a href="{{ url_for('logout') }}">Logout</a>
-        {% endif %}
-    </div>
-    <hr>
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+    {% if title %}{{ title }} - Structured Safety{% else %}Welcome to Structured Safety{% endif %}
+{% endblock %}
+
+{% block navbar%}
+    <nav class="navbar navbar-default">
+        <div>Structured Safety:
+            <a href="{{ url_for('index') }}">Home</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </div>
+    </nav>  
+{% endblock %}
+{% block content %}
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <ul>
         {% for message in messages %}
-        <li>{{ message }}</li>
+        <div class="alert alert-info" role="alert">{{ message }}</div>
         {% endfor %}
-    </ul>
     {% endif %}
     {% endwith %}
-    {% block content %} {% endblock %}
-</body>
-</html>
+
+    {# application content needs to be provided in the app_content block #}
+    {% block app_content %} {% endblock %}
+{% endblock %}
