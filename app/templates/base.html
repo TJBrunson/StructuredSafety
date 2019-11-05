@@ -5,18 +5,30 @@
 {% endblock %}
 
 {% block navbar%}
-    <nav class="navbar navbar-default">
-        <div>Structured Safety:
-            <a href="{{ url_for('index') }}">Home</a>
-            {% if current_user.is_anonymous %}
-            <a href="{{ url_for('login') }}">Login</a>
-            {% else %}
-            <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
-            <a href="{{ url_for('logout') }}">Logout</a>
-            {% endif %}
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="#">Demo</a>
+                <a class="nav-item nav-link" href="#">Contact Us</a>
+            </div>
+            <span class="navbar-nav navbar-right">
+                {% if current_user.is_anonymous %}
+                <a class="btn btn-sm btn-outline-primary mr-sm-2" href="{{ url_for('login') }}">Login</a>
+                <a class="btn btn-sm btn-outline-secondary my-2 my-sm-0" href="{{ url_for('register') }}"> Register</a>
+                {% else %}
+                <a class="btn btn-sm btn-outline-secondary mr-sm-2" 
+                    href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+                <a class="btn btn-sm btn-success my-2 my-sm-0" href="{{ url_for('logout') }}">Logout</a>
+                {% endif %}
+            </span>
         </div>
-    </nav>  
+    </nav>
 {% endblock %}
+
 {% block content %}
     {% with messages = get_flashed_messages() %}
     {% if messages %}
