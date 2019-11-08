@@ -1,7 +1,26 @@
 .masthead {
-    min-height: 500px;
-    background-image: url('../img/header-image.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  height: 50vh;
+  min-height: 500px;
+  background-image: url('../img/header-image.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   }
+
+.about-us{
+  height:30vh;
+  min-height:100px;
+  background-image: url('../img/about-us-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#sticky-footer {
+  flex-shrink: none;
+}

@@ -4,7 +4,7 @@
 <!-- Full Page Image Header with Vertically Centered Content -->
 <header class="masthead">
     <div class="container h-100">
-        <div class="row h-100 justify-content-center align-items-center">
+        <div class="row h-100 align-items-center">
             <div class="col-12 text-center">
                 <h1 class="text-light">Vertically Centered Masthead Content</h1>
                 <p class="lead text-light">A great starter layout for a landing page</p>
@@ -13,10 +13,61 @@
     </div>
 </header>
 <!-- Page Content -->
-<section class="py-5">
-    <div class="container">
-        <h2 class="font-weight-light">Page Content</h2>
-        <p>english english english english english english english english english english english english english english english </p>
+<section class="py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md">
+                <h2 class="text-center">Features</h2>
+                <p class="text-center font-weight-light">We work to make your company safer.</p>
+            </div>
+        </div>
+        <div class="card-deck">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Quality</h5>
+                    <p class="card-text font-weight-light">All of are solutions are meant to function on every device. </p>
+                </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">QR Code Access</h5>
+                    <p class="card-text font-weight-light">Access all company documents, instructional information, and more with one QR code.</p>
+                </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Consulting & Support</h5>
+                    <p class="card-text font-weight-light">Need something special? Just ask!</p>
+                    <a href="" class="btn btn-primary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pt-3">
+    <div class="about-us">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <h2 class="text-light text-center">About Us</h2>
+                <p class="px-5 text-light">
+                        We specialized in creating and deploying unique and new safety technologies to help you keep your employees safe. 
+                        We will work with your company to create customized landing pages for all of your safety documents so that they can be easily accessed by the employees who need it most often. 
+                        We can also help you update documents and forms, as needed.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pt-3">
+    <div class="row align-items-center">
+        <div class="col-6">
+            <img class="mx-auto d-block" 
+                src="{{url_for('static', filename='img/frahler-logo.jpg', width=50, mode='fit')}}" alt="Frahler Electric Company">
+        </div>
+        <div class="col-6">
+            <img class="mx-auto d-block" 
+                src="{{ url_for('static', filename='img/McCoy-logo.jpg', height=50) }}" alt="McCoy Electric Company">
+        </div>
     </div>
 </section>
 {% endblock %}
