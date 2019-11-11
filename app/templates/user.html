@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-
-    <h1>User: {{ user.username }}</h1>
-    <hr>
-    <h2>Email: {{ user.email }}</h2>
-
+<span class="py-5">
+    <div class="container-fluid">
+        <h1>User: {{ user.username }}</h1>
+        <hr>
+        <h2>Email: {{ user.email }}</h2>
+    </div> 
+</span>
 {% endblock %}
