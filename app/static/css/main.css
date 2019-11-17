@@ -21,9 +21,9 @@ body {
   height: 100%;
 }
 
-#sticky-footer {
-  position: fixed;
-  bottom:0px;
+/* .footer{
+  position:absolute;
+  bottom: 0;
   width:100%;
-  flex-shrink: none;
-}
+  height: 60px;
+} */
