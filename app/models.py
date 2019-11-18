@@ -27,7 +27,7 @@ def load_user(id):
 class Company(db.Model):
     __tablename__ = 'company'
     id = db.Column(db.Integer, primary_key=True)
-    company_name = db.Column(db.String(64), index=True)
+    company_name = db.Column(db.String(64), index=True, unique=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
