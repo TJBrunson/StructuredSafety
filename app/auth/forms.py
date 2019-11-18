@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SelectField, SubmitField, FormField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
-from app.models import User
+from app.models import User, Company, Address
 
 class UserLoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -26,3 +26,17 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('An account with this email already exists. Please use another email.')
+
+class CompanyRegistrationForm(FlaskForm):
+    company_name = StringField('Company Name', validators=[DataRequired()])
+
+class AddressForm(FlaskForm):
+    address_1 = StringField('Address 1', validators=[DataRequired()])
+    address_2 = StringField('Address 2')
+    city = StringField('City/Provence', validators=[DataRequired()])
+    state = StringField('State', validators=[DataRequired()])
+    postal_code = StringField('Postal Code', validators=[DataRequired()])
+
+class NewCompanyRegistrationForm(FlaskForm):
+    company_info = FormField(CompanyRegistrationForm)
+    company_address = FormField(AddressForm)
