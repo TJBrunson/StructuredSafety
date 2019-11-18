@@ -30,6 +30,7 @@ class Company(db.Model):
     company_name = db.Column(db.String(64), index=True, unique=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     employees = db.relationship('User', backref='employee', lazy='dynamic')
+    documents = db.relationship('Document', backref='documents', lazy='dynamic')
 
     def __repr__(self):
         return '<Company {}>'.format(self.company_name)
@@ -46,3 +47,12 @@ class Address(db.Model):
 
     def __repr__(self):
         return '<Address: {} {} \n {}, {} {}'.format(self.street_number, self.street_name, self.city, self.state, self.postal_code)
+
+class Document(db.Model):
+    __tablename__ = 'documents'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), index=True)
+    company = db.Column(db.Integer, db.ForeignKey('company.id'))
+
+    def __repr__(self):
+        return '<Document name: {}'.format(self.name)
