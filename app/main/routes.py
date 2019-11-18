@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request, current_app
 from app import db
 from app.main import bp
-from app.models import User
+from app.models import User, Company
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
@@ -19,3 +19,8 @@ def user(username):
 @bp.route('/demo')
 def demo():
     return render_template('demo.html', title="Demo")
+
+@bp.route('/company/<company>')
+def company(company):
+    company = Company.query.filter_by(company=company).first_or_404()
+    return render_template('company.html', company = company)
