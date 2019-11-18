@@ -20,7 +20,7 @@ def user(username):
 def demo():
     return render_template('demo.html', title="Demo")
 
-@bp.route('/company/<company>')
-def company(company):
-    company = Company.query.filter_by(company=company).first_or_404()
-    return render_template('company.html', company = company)
+@bp.route('/company/<company_name>')
+def company(company_name):
+    company = Company.query.filter_by(company_name=company_name).first_or_404()
+    return render_template('company.html', company=company)

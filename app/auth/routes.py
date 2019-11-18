@@ -3,8 +3,8 @@ from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user
 from app import db
 from app.auth import bp
-from app.auth.forms import UserLoginForm, RegistrationForm
-from app.models import User
+from app.auth.forms import UserLoginForm, RegistrationForm, CompanyRegistrationForm
+from app.models import User, Company, Address
 
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -42,3 +42,22 @@ def register():
         flash('Congratulations, you are now a member of Structured Safety!')
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', title='Register', form=form)
+
+@bp.route('/company/register', methods=['GET', 'POST'])
+def companyRegistration():
+    flash("Boom Baby!")
+    form = CompanyRegistrationForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=current_user.username).first_or_404()
+        company = Company(company_name=form.company_name.data, owner_id=user.id)
+        # address = Address(street_name_1=form.street_name_1.data, 
+        #                   street_name_2=form.street_name_2.data, 
+        #                   city=form.city.data,
+        #                   state=form.state.data,
+        #                   postal_code=form.postal_code.data)
+        db.session.add(company)
+        # db.session.add(address)
+        db.session.commit()
+        flash('Your company, {}, has been registered with Structured Safety!'.format(form.company_name.data))
+        return redirect(url_for('main.company', company_name=form.company_name.data))
+    return render_template('auth/register_company.html', title='Register a new Company', form=form)

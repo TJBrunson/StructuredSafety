@@ -29,6 +29,7 @@ class RegistrationForm(FlaskForm):
 
 class CompanyRegistrationForm(FlaskForm):
     company_name = StringField('Company Name', validators=[DataRequired()])
+    submit = SubmitField("test registration")
 
 class AddressForm(FlaskForm):
     address_1 = StringField('Address 1', validators=[DataRequired()])
@@ -40,3 +41,4 @@ class AddressForm(FlaskForm):
 class NewCompanyRegistrationForm(FlaskForm):
     company_info = FormField(CompanyRegistrationForm)
     company_address = FormField(AddressForm)
+    submit = SubmitField('Register Company')

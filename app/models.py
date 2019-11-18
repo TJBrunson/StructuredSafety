@@ -36,8 +36,8 @@ class Company(db.Model):
 class Address(db.Model):
     __tablename__ = 'address'
     id = db.Column(db.Integer, primary_key=True)
-    street_number = db.Column(db.Integer)
-    street_name = db.Column(db.String(64))
+    street_name_1 = db.Column(db.String(256))
+    street_name_2 = db.Column(db.String(256))
     city = db.Column(db.String(64))
     state = db.Column(db.String(64))
     postal_code = db.Column(db.Integer)
