@@ -28,6 +28,7 @@ class Company(db.Model):
     __tablename__ = 'company'
     id = db.Column(db.Integer, primary_key=True)
     company_name = db.Column(db.String(64), index=True, unique=True)
+    #next two lines conflict because they are both foreign keys to user table
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     employees = db.relationship('User', backref='employee', lazy='dynamic')
     documents = db.relationship('Document', backref='documents', lazy='dynamic')
