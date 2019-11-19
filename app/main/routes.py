@@ -23,5 +23,5 @@ def demo():
 @bp.route('/company/<company_name>')
 def company(company_name):
     company = Company.query.filter_by(company_name=company_name).first_or_404()
-    User = User.query.filter_by(id=company.owner_id).first_or_404()
+    user = User.query.filter_by(id=company.owner_id).first_or_404()
     return render_template('company.html', company=company, user=user)

@@ -10,7 +10,7 @@ from app.models import User, Company, Address
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     form = UserLoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -45,7 +45,6 @@ def register():
 
 @bp.route('/company/register', methods=['GET', 'POST'])
 def companyRegistration():
-    flash("Boom Baby!")
     form = CompanyRegistrationForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=current_user.username).first_or_404()
