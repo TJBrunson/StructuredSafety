@@ -9,7 +9,14 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    company = db.Column(db.Integer, db.ForeignKey('company.id'))
+    companies = db.relationship(
+        "Company",
+        primaryjoin=lambda : db.or_(
+            User.id == db.foreign(Company.owner_id),
+            User.id == db.foreign(Company.employee_id)
+        ),
+        viewonly=True,
+    )
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -28,10 +35,11 @@ class Company(db.Model):
     __tablename__ = 'company'
     id = db.Column(db.Integer, primary_key=True)
     company_name = db.Column(db.String(64), index=True, unique=True)
-    #next two lines conflict because they are both foreign keys to user table
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    employees = db.relationship('User', backref='employee', lazy='dynamic')
-    documents = db.relationship('Document', backref='documents', lazy='dynamic')
+    employee_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    owners = db.relationship('User', foreign_keys=[owner_id])
+    employees = db.relationship('User', foreign_keys=[employee_id])
+    documents = db.relationship('Document')
 
     def __repr__(self):
         return '<Company {}>'.format(self.company_name)
@@ -50,7 +58,7 @@ class Address(db.Model):
         return '<Address: {} {} \n {}, {} {}'.format(self.street_number, self.street_name, self.city, self.state, self.postal_code)
 
 class Document(db.Model):
-    __tablename__ = 'documents'
+    __tablename__ = 'document'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), index=True)
     company = db.Column(db.Integer, db.ForeignKey('company.id'))
