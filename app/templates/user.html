@@ -6,7 +6,13 @@
         <h1>User: {{ user.username }}</h1>
         <hr>
         <h2>Email: {{ user.email }}</h2>
-        <a href="{{ url_for('auth.companyRegistration') }}" class="btn btn-primary">Create a Company</a>
+        {% if company.comnpany_name == null %}
+            <a href="{{ url_for('auth.companyRegistration') }}" class="btn btn-primary">Create a Company</a>
+        {% else %}
+            <a href="{{ url_for('main.company', company_name=company.company_name) }}" class="btn btn-primary">See Company Documentation</a>
+        {% endif %}
+        <hr>
+        <h3>Comapny: {{company.company_name}}</h3>
     </div> 
 </span>
 {% endblock %}

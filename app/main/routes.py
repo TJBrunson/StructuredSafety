@@ -14,7 +14,7 @@ def index():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    company = Company.query.filter_by(owner_id = user.id).first_or_404()
+    company = Company.query.filter_by(owner_id = user.id).first()
     return render_template('user.html', user=user, company=company)
 
 @bp.route('/demo')
