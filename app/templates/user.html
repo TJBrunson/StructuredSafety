@@ -3,16 +3,31 @@
 {% block app_content %}
 <span class="py-5">
     <div class="container">
-        <h1>Hello, {{ user.username }}</h1>
-        <hr>
-        <h2>Email: {{ user.email }}</h2>
-        {% if company.comnpany_name == null %}
-            <a href="{{ url_for('auth.companyRegistration') }}" class="btn btn-primary">Create a Company</a>
-        {% else %}
-            <a href="{{ url_for('main.company', company_name=company.company_name) }}" class="btn btn-primary">See Company Documentation</a>
-        {% endif %}
-        <hr>
-        <h3>Comapny: {{company.company_name}}</h3>
+        <h1>Hello, 
+            {% if user.first_name != None %}
+            {{ user.first_name[0]|upper }}{{ user.first_name[1:] }}! 
+            {% else %}
+            {{user.username[0]|upper}}{{ user.username[1:] }}! 
+            {% endif %}
+            What would you like to do?</h1>
     </div> 
 </span>
+<div class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <a class="card text-center" href="#">
+                    <h5 class="card-title">Visit your Company</h5>
+                    <p class="card-text">View your company's documents and forms.</p>
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <a class="card text-center" href="#">
+                    <h5 class="card-title">Create a new Company</h5>
+                    <p class="card-text">Create a company to host your documents, forms and other data.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
