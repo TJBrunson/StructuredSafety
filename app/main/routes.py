@@ -26,3 +26,8 @@ def company(company_name):
     company = Company.query.filter_by(company_name=company_name).first_or_404()
     user = User.query.filter_by(username=current_user.username).first_or_404()
     return render_template('company.html', company=company, user=user)
+
+@bp.route('company/<company_name>/add_document', methods=['GET', 'POST'])
+def addDocuments(company_name):
+    title = company_name + " - Add a Document"
+    return render_template('add_document.html', title=title)
