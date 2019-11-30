@@ -64,6 +64,7 @@ class Document(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), index=True)
     company = db.Column(db.Integer, db.ForeignKey('company.id'))
+    file_location = db.Column(db.String(256))
 
     def __repr__(self):
         return '<Document name: {}'.format(self.name)
