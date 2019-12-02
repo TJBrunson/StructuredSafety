@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="container py-5">
+{%for item in files.children recursive%}
+    <div class="accordian">
+        <div class="card">
+            <div class="card-header" data-toggle="collapse" data-target="#{{item.name}}">
+                <h5 class="mb-0">
+                <button class="btn btn-link" aria-expanded="false" aria-controls="{{item.name}}">
+                    {{item.name | replace("_", " ")}}
+                </button>
+                </h5>
+            </div>
+            <div id="{{item.name}}" class="collapse" aria-labelledby="{{item.name}}" data-parent="#accordion">
+                <div class="card-body">
+                    {% if item.name == "Policies" %}
+                    {% for child in item.children %}
+                    <ul><a href="{{ url_for('main.fetchFile', company_name='Frahler_Electric', sub_directory=item.name, file_name=child.name) }}">
+                        {{child.name|replace("_", " ")|replace("-", " ")}}
+                    </a></ul>
+                    {% endfor %}
+                    {% endif %}         
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
