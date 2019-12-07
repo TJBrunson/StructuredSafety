@@ -46,10 +46,15 @@ def fetchFile(company_name, sub_directory, sub_directory2, file_name):
     print("PATH: " + path)
     return send_from_directory(path, file_name)
 
-@bp.route('company/Frahler_Electric')
+@bp.route('frahler-electric-company-pvjaxudmry')
 def frahler():
-    path = "/Users/tim/Documents" + "/uploads/companies/Frahler_Electric"
-    return render_template('frahler.html', files = make_files(path), title = "Frahler Electric Company")
+    path = "/Users/tim/Documents" + "/uploads/companies/Frahler_Electric_Company"
+    return render_template('hard-coded-company.html', files = make_files(path), title = "Frahler_Electric_Company")
+
+@bp.route('mccoy-electric-qr-code-uvhu9jk1ia')
+def mccoy():
+    path = "/Users/tim/Documents" + "/uploads/companies/McCoy_Electric"
+    return render_template('hard-coded-company.html', files=make_files(path), title="McCoy_Electric")
 
 def make_files(path):
     tree = dict(name=os.path.basename(path), children=[])
