@@ -2,29 +2,137 @@
 
 {% block app_content %}
 <div class="container py-5">
-{%for item in files.children recursive%}
-    <div class="accordian">
-        <div class="card">
-            <div class="card-header" data-toggle="collapse" data-target="#{{item.name}}">
-                <h5 class="mb-0">
-                <button class="btn btn-link" aria-expanded="false" aria-controls="{{item.name}}">
-                    {{item.name | replace("_", " ")}}
-                </button>
-                </h5>
-            </div>
-            <div id="{{item.name}}" class="collapse" aria-labelledby="{{item.name}}" data-parent="#accordion">
-                <div class="card-body">
-                    {% if item.name == "Policies" %}
-                    {% for child in item.children %}
-                    <ul><a href="{{ url_for('main.fetchFile', company_name='Frahler_Electric', sub_directory=item.name, file_name=child.name) }}">
-                        {{child.name|replace("_", " ")|replace("-", " ")}}
-                    </a></ul>
-                    {% endfor %}
-                    {% endif %}         
+{%for item in files.children recursive %}
+    {% if item.name == "Policies" %}
+        <div class="accordian">
+            <div class="card">
+                <div class="card-header" data-toggle="collapse" data-target="#{{item.name}}">
+                    <h5 class="mb-0">
+                    <button class="btn btn-link" aria-expanded="false" aria-controls="{{item.name}}">
+                        {{item.name | replace("_", " ")}}
+                    </button>
+                    </h5>
+                </div>
+                <div id="{{item.name}}" class="collapse" aria-labelledby="{{item.name}}" data-parent="#accordion">
+                    <div class="card-body">
+                        {% for child in item.children %}
+                        {% if child.children|length > 0 %}
+                            <h5>{{child.name}}</h5><hr>
+                            {% for innerChild in child.children %}
+                            <ul><a href="{{ url_for('main.fetchFile', company_name='Frahler_Electric', sub_directory=item.name, sub_directory2=child.name, file_name=innerChild.name) }}">
+                                {{innerChild.name|replace("_", " ")|replace("-", " ")}}
+                            </a></ul>
+                            {% endfor %}
+                        {% else %}
+                            <ul><a href="{{ url_for('main.fetchFile', company_name='Frahler_Electric', sub_directory=item.name, sub_directory2='None', file_name=child.name) }}">
+                                {{child.name|replace("_", " ")|replace("-", " ")}}
+                            </a></ul>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}        
+{% endfor %}
+{% for item in files.children recursive %}
+    {% if item.name=="Safety_Data_Sheets" %}
+        <div class="accordian">
+            <div class="card">
+                <div class="card-header" data-toggle="collapse" data-target="#{{item.name}}">
+                    <h5 class="mb-0">
+                    <button class="btn btn-link" aria-expanded="false" aria-controls="{{item.name}}">
+                        {{item.name | replace("_", " ")}}
+                    </button>
+                    </h5>
+                </div>
+                <div id="{{item.name}}" class="collapse" aria-labelledby="{{item.name}}" data-parent="#accordion">
+                    <div class="card-body">
+                        {% for child in item.children %}
+                        {% if child.children|length > 0 %}
+                            <h5>{{child.name}}</h5><hr>
+                            {% for innerChild in child.children %}
+                            <ul><a href="{{ url_for('main.fetchFile', company_name='Frahler_Electric', sub_directory=item.name, sub_directory2=child.name, file_name=innerChild.name) }}">
+                                {{innerChild.name|replace("_", " ")|replace("-", " ")}}
+                            </a></ul>
+                            {% endfor %}
+                        {% else %}
+                            <ul><a href="{{ url_for('main.fetchFile', company_name='Frahler_Electric', sub_directory=item.name, sub_directory2='None', file_name=child.name) }}">
+                                {{child.name|replace("_", " ")|replace("-", " ")}}
+                            </a></ul>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+{% for item in files.children recursive %}
+    {% if item.name == "Forms" %}
+        <div class="accordian">
+            <div class="card">
+                <div class="card-header" data-toggle="collapse" data-target="#{{item.name}}">
+                    <h5 class="mb-0">
+                    <button class="btn btn-link" aria-expanded="false" aria-controls="{{item.name}}">
+                        {{item.name | replace("_", " ")}}
+                    </button>
+                    </h5>
+                </div>
+                <div id="{{item.name}}" class="collapse" aria-labelledby="{{item.name}}" data-parent="#accordion">
+                    <div class="card-body">
+                        {% for child in item.children %}
+                        {% if child.children|length > 0 %}
+                            <h5>{{child.name}}</h5><hr>
+                            {% for innerChild in child.children %}
+                            <ul><a href="{{ url_for('main.fetchFile', company_name='Frahler_Electric', sub_directory=item.name, sub_directory2=child.name, file_name=innerChild.name) }}">
+                                {{innerChild.name|replace("_", " ")|replace("-", " ")}}
+                            </a></ul>
+                            {% endfor %}
+                        {% else %}
+                        <ul><a href="{{ url_for('main.fetchFile', company_name='Frahler_Electric', sub_directory=item.name, sub_directory2='None', file_name=child.name) }}">
+                            {{child.name|replace("_", " ")|replace("-", " ")}}
+                        </a></ul>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+{% for item in files.children recursive %}
+    {% if item.name == "Miscellaneous" %}
+        <div class="accordian">
+            <div class="card">
+                <div class="card-header" data-toggle="collapse" data-target="#{{item.name}}">
+                    <h5 class="mb-0">
+                    <button class="btn btn-link" aria-expanded="false" aria-controls="{{item.name}}">
+                        {{item.name | replace("_", " ")}}
+                    </button>
+                    </h5>
+                </div>
+                <div id="{{item.name}}" class="collapse" aria-labelledby="{{item.name}}" data-parent="#accordion">
+                    <div class="card-body">
+                        {% for child in item.children %}
+                        {% if child.children|length > 0 %}
+                            <h5>{{child.name}}</h5><hr>
+                            {% for innerChild in child.children %}
+                            <ul><a href="{{ url_for('main.fetchFile', company_name='Frahler_Electric', sub_directory=item.name, sub_directory2=child.name, file_name=innerChild.name) }}">
+                                {{innerChild.name|replace("_", " ")|replace("-", " ")}}
+                            </a></ul>
+                            {% endfor %}
+                        {% else %}
+                        <ul><a href="{{ url_for('main.fetchFile', company_name='Frahler_Electric', sub_directory=item.name, sub_directory2='None', file_name=child.name) }}">
+                            {{child.name|replace("_", " ")|replace("-", " ")}}
+                        </a></ul>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endfor %}
 </div>
 {% endblock %}
