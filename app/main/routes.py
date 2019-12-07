@@ -20,10 +20,6 @@ def user(username):
     company = Company.query.filter_by(owner_id = user.id).first()
     return render_template('user.html', user=user, company=company)
 
-@bp.route('/demo')
-def demo():
-    return render_template('demo.html', title="Demo")
-
 @bp.route('/company/<company_name>')
 def company(company_name):
     company = Company.query.filter_by(company_name=company_name).first_or_404()
@@ -45,6 +41,11 @@ def fetchFile(company_name, sub_directory, sub_directory2, file_name):
         path = path + '/' + sub_directory2
     print("PATH: " + path)
     return send_from_directory(path, file_name)
+
+@bp.route('/demo')
+def demo():
+    path = "/Users/tim/Documents" + "/uploads/companies/Demo"
+    return render_template('demo.html', files = make_files(path), title = "Demo")
 
 @bp.route('frahler-electric-company-pvjaxudmry')
 def frahler():

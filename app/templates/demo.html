@@ -1,14 +1,140 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-
-<section class="pt-5">
-    <div class="container-fluid">
-        <div class="row h100">
-            <div class="col-12">
-                <h1>TEST DEMO</h1>
+<div class="container py-5">
+<h1>{{title|replace("_", " ")}}</h1><hr>
+{%for item in files.children recursive %}
+    {% if item.name == "Policies" %}
+        <div class="accordian">
+            <div class="card">
+                <div class="card-header" data-toggle="collapse" data-target="#{{item.name}}">
+                    <h5 class="mb-0">
+                    <button class="btn btn-link" aria-expanded="false" aria-controls="{{item.name}}">
+                        {{item.name | replace("_", " ")}}
+                    </button>
+                    </h5>
+                </div>
+                <div id="{{item.name}}" class="collapse" aria-labelledby="{{item.name}}" data-parent="#accordion">
+                    <div class="card-body">
+                        {% for child in item.children | sort(attribute='name') %}
+                        {% if child.children|length > 0 %}
+                            <h5>{{child.name}}</h5><hr>
+                            {% for innerChild in child.children %}
+                            <ul><a href="{{ url_for('main.fetchFile', company_name=title, sub_directory=item.name, sub_directory2=child.name, file_name=innerChild.name) }}">
+                                {{innerChild.name|replace("_", " ")|replace("-", " ")}}
+                            </a></ul>
+                            {% endfor %}
+                        {% else %}
+                            <ul><a href="{{ url_for('main.fetchFile', company_name=title, sub_directory=item.name, sub_directory2='None', file_name=child.name) }}">
+                                {{child.name|replace("_", " ")|replace("-", " ")}}
+                            </a></ul>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    {% endif %}        
+{% endfor %}
+{% for item in files.children recursive %}
+    {% if item.name=="Safety_Data_Sheets" %}
+        <div class="accordian">
+            <div class="card">
+                <div class="card-header" data-toggle="collapse" data-target="#{{item.name}}">
+                    <h5 class="mb-0">
+                    <button class="btn btn-link" aria-expanded="false" aria-controls="{{item.name}}">
+                        {{item.name | replace("_", " ")}}
+                    </button>
+                    </h5>
+                </div>
+                <div id="{{item.name}}" class="collapse" aria-labelledby="{{item.name}}" data-parent="#accordion">
+                    <div class="card-body">
+                        {% for child in item.children | sort(attribute='name') %}
+                        {% if child.children|length > 0 %}
+                            <h5>{{child.name}}</h5><hr>
+                            {% for innerChild in child.children | sort(attribute='name')%}
+                            <ul><a href="{{ url_for('main.fetchFile', company_name=title, sub_directory=item.name, sub_directory2=child.name, file_name=innerChild.name) }}">
+                                {{innerChild.name|replace("_", " ")|replace("-", " ")}}
+                            </a></ul>
+                            {% endfor %}
+                        {% else %}
+                            <ul><a href="{{ url_for('main.fetchFile', company_name=title, sub_directory=item.name, sub_directory2='None', file_name=child.name) }}">
+                                {{child.name|replace("_", " ")|replace("-", " ")}}
+                            </a></ul>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+{% for item in files.children recursive %}
+    {% if item.name == "Forms" %}
+        <div class="accordian">
+            <div class="card">
+                <div class="card-header" data-toggle="collapse" data-target="#{{item.name}}">
+                    <h5 class="mb-0">
+                    <button class="btn btn-link" aria-expanded="false" aria-controls="{{item.name}}">
+                        {{item.name | replace("_", " ")}}
+                    </button>
+                    </h5>
+                </div>
+                <div id="{{item.name}}" class="collapse" aria-labelledby="{{item.name}}" data-parent="#accordion">
+                    <div class="card-body">
+                        {% for child in item.children | sort(attribute='name')%}
+                        {% if child.children|length > 0 %}
+                            <h5>{{child.name}}</h5><hr>
+                            {% for innerChild in child.children | sort(attribute='name')%}
+                            <ul><a href="{{ url_for('main.fetchFile', company_name=title, sub_directory=item.name, sub_directory2=child.name, file_name=innerChild.name) }}">
+                                {{innerChild.name|replace("_", " ")|replace("-", " ")}}
+                            </a></ul>
+                            {% endfor %}
+                        {% else %}
+                        <ul><a href="{{ url_for('main.fetchFile', company_name=title, sub_directory=item.name, sub_directory2='None', file_name=child.name) }}">
+                            {{child.name|replace("_", " ")|replace("-", " ")}}
+                        </a></ul>
+                        {% endif %}
+                        {% endfor %}
+                        <small>* For forms to be fillable, they must be downloaded and opened through Adobe Acrobat Reader for PDFs. They are not fillable in a browser. The Adobe Acrobat reader can be found at in the iOS and Android app stores. They are also available on any Mac or Windows computer. Once installed, open the PDF as normal in your browser. From here, tap the share button and share it to the Adobe Acrobat Reader. In this application, the forms are fillable and can then be emailed through your work, or personal email.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+{% for item in files.children recursive %}
+    {% if item.name == "Miscellaneous" %}
+        <div class="accordian">
+            <div class="card">
+                <div class="card-header" data-toggle="collapse" data-target="#{{item.name}}">
+                    <h5 class="mb-0">
+                    <button class="btn btn-link" aria-expanded="false" aria-controls="{{item.name}}">
+                        {{item.name | replace("_", " ")}}
+                    </button>
+                    </h5>
+                </div>
+                <div id="{{item.name}}" class="collapse" aria-labelledby="{{item.name}}" data-parent="#accordion">
+                    <div class="card-body">
+                        {% for child in item.children | sort(attribute='name')%}
+                        {% if child.children|length > 0 %}
+                            <h5>{{child.name}}</h5><hr>
+                            {% for innerChild in child.children | sort(attribute='name')%}
+                            <ul><a href="{{ url_for('main.fetchFile', company_name=title, sub_directory=item.name, sub_directory2=child.name, file_name=innerChild.name) }}">
+                                {{innerChild.name|replace("_", " ")|replace("-", " ")}}
+                            </a></ul>
+                            {% endfor %}
+                        {% else %}
+                        <ul><a href="{{ url_for('main.fetchFile', company_name=title, sub_directory=item.name, sub_directory2='None', file_name=child.name) }}">
+                            {{child.name|replace("_", " ")|replace("-", " ")}}
+                        </a></ul>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+</div>
 {% endblock %}
