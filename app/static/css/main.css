@@ -24,25 +24,3 @@ html,
 body {
   height: 100%;
 }
-
-.list-group-flush .list-group-item{
-  border-right:0;
-  border-left:0;
-  border-radius: 0;
-}
-.bg-light {
-  background-color: #f8f9fa!important;
-}
-
-.list-group-item {
-  position: relative;
-  display: block;
-  padding: .75rem 1.25rem;
-  margin-bottom: -1px;
-  border: 1px solid rgba(0, 0, 0, .125);
-}
-.list-group-item-action {
-  width:100%;
-  color: #495057;
-  text-align: inherit;
-}

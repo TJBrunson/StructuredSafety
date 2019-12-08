@@ -3,6 +3,12 @@
 {% block app_content %}
 <div class="container py-5">
 <h1>{{title|replace("_", " ")}}</h1><hr>
+<p>Because this is a demo, we thought we'd put the QR code for this page right here! Go ahead and open the camera app on your
+    phone and hover it over the QR code. You should see a prompt asking you to visit this page on your phone after it reads
+    the code. Tap the prompt and you should end up here!
+</p>
+<p>By the way, you don't dont have to show your QR code here like this. Its just here as part of the demonstration!</p>
+<img src="{{url_for('static', filename='img/demo-qr-code.png')}}" alt="">
 {%for item in files.children recursive %}
     {% if item.name == "Policies" %}
         <div class="accordian">
