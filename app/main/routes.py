@@ -13,6 +13,10 @@ import os
 def index():
     return render_template('index.html', title='Home')
 
+@bp.route('/contact')
+def contactUs():
+    return render_template('contact-us.html', title='Contact Us ')
+
 @bp.route('/user/<username>')
 @login_required
 def user(username):
